@@ -1,0 +1,24 @@
+name: TestProject
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  Upload_repo: 
+    runs-on: macos-latest
+    
+    steps:
+      - name: Upload repository
+        uses: actions/checkout@v2
+
+      - name: Sepup
+        run: make setup
+
+      - name: Check lint
+        run: make lint
+
+      - name: Execute tests via PHPUnit
+        run: make test_phpunit
