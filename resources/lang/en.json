@@ -1,0 +1,14 @@
+{
+    "Login": "Войти",
+    "E-Mail Address": "Email",
+    "Password": "Пароль",
+    "Remember Me": "Запомнить меня",
+    "Forgot Your Password?" :"Забыли пароль?",
+    "Confirm Password": "Подтверждение",
+    "Register": "Зарегистрировать",
+    "Registration": "Регистрация",
+    "Name": "Имя",
+    "Logging": "Вход",
+    "Reset Password": "Сброс пароля",
+    "Send Password Reset Link": "Сбросить пароль"
+}

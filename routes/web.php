@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TaskStatusController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+//Route::get('/task_statuses', [App\Http\Controllers\TaskStatusController::class, 'index'])->name('task_statuses.index');
+Route::resource('task_statuses', TaskStatusController::class);
+//Route::get('/task_statuses', function () { return view('statuses.index'); })->name('task_statuses.index');
+
