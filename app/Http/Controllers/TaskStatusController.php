@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreStatusRequest;
 use App\Models\TaskStatus;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class TaskStatusController extends Controller
 {
     public function index()
     {
-        return view('statuses.index');
+        $statuses = TaskStatus::paginate(10);
+        return view('statuses.index', compact('statuses'));
     }
 
     public function create(TaskStatus $status)
@@ -18,70 +18,46 @@ class TaskStatusController extends Controller
         return view('statuses.create', compact('status'));
     }
 
-    public function store(Request $request)
+    public function store(StoreStatusRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => ['required', 'min:1']
-        ]);
+        $data = $request->validated();
 
-        if ($validator->fails()) {
-            flash("Некорректный URL: {$request->input('name')}")->error();
-            return back()->withErrors($validator);
-        }
-        var_dump($validator->safe()->toArray());
-        $data = $validator->safe()->toArray();
-
-        //$data = $request->validated();
-        $article = new TaskStatus();
-        $article->fill($data);
-        $article->save();
+        $status = new TaskStatus();
+        $status->fill($data);
+        $status->save();
 
         flash('Статус успешно создан')->success();
         return redirect()->route('task_statuses.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\TaskStatus  $taskStatus
-     * @return \Illuminate\Http\Response
-     */
-    public function show(TaskStatus $taskStatus)
+    public function edit($id)
     {
-        //
+        $status = TaskStatus::findOrFail($id);
+        return view('statuses.edit', compact('status'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\TaskStatus  $taskStatus
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(TaskStatus $taskStatus)
+    public function update(StoreStatusRequest $request, $id)
     {
-        //
+        $status = TaskStatus::findOrFail($id);
+
+        $data = $request->validated();
+        $status->fill($data);
+        $status->save();
+        return redirect()->route('task_statuses.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TaskStatus  $taskStatus
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, TaskStatus $taskStatus)
+    public function destroy($id)
     {
-        //
-    }
+        $status = TaskStatus::findOrFail($id);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\TaskStatus  $taskStatus
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(TaskStatus $taskStatus)
-    {
-        //
+        if (count($status->tasks) == 0) {
+            $status->delete();
+
+            flash('Статус успешно удалён')->success();
+            return redirect()->route('task_statuses.index');
+        }
+
+        flash('Не удалось удалить статус ')->error();
+        return redirect()->route('task_statuses.index');
     }
 }

@@ -81,3 +81,23 @@
     </div>
 </body>
 </html>
+
+<ul class="navbar-nav ml-auto">
+    <!-- Authentication Links -->
+    <li class="nav-item dropdown">
+        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+            Vadim <span class="caret"></span>
+        </a>
+
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://php-l4-task-manager.herokuapp.com/logout"
+               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                Выход
+            </a>
+
+            <form id="logout-form" action="https://php-l4-task-manager.herokuapp.com/logout" method="POST" style="display: none;">
+                <input type="hidden" name="_token" value="TFjlen79OS5d6tgSoLXjRTWDxL3j4VTZF8GU9H7j">                                    </form>
+        </div>
+    </li>
+</ul>

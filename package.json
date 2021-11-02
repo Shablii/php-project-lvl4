@@ -18,6 +18,7 @@
         "lodash": "^4.17.19",
         "popper.js": "^1.16.1",
         "postcss": "^8.1.14",
+        "resolve-url-loader": "^4.0.0",
         "sass": "^1.32.11",
         "sass-loader": "^11.0.1"
     },
@@ -26,5 +27,8 @@
     "version": "1.0.0",
     "engines": {
         "node": "14.x"
+    },
+    "dependencies": {
+        "@rails/ujs": "^6.1.4-1"
     }
 }

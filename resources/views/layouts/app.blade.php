@@ -3,20 +3,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-param" content="_token" />
 
     <title>Менеджер задач</title>
 
-    <!-- Scripts -->
-    <script src="https://php-l4-task-manager.herokuapp.com/js/app.js" defer></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
     <!-- Styles -->
-    <link href="https://php-l4-task-manager.herokuapp.com/css/app.css" rel="stylesheet">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/app.js') }}"></script>
 </head>
 <body>
 <div id="app">
@@ -31,34 +25,55 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link " href="https://php-l4-task-manager.herokuapp.com/tasks">
-                            Задачи                            </a>
+                        <a href="{{ route('tasks.index') }}"
+                           class="nav-link{{ request()->routeIs('tasks.index') ? ' active' : '' }}"
+                        >Задачи</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="{{ route('task_statuses.index') }}">Статусы</a>
+                        <a href="{{ route('task_statuses.index') }}"
+                           class="nav-link{{ request()->routeIs('task_statuses.index') ? ' active' : '' }}"
+                        >Статусы</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " href="https://php-l4-task-manager.herokuapp.com/labels">
                             Метки                            </a>
                     </li>
                 </ul>
-            @if (Route::has('login'))
                 <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            @auth
-                                <a href="{{ url('/home') }}" class="nav-link">Home</a>
-                            @else
-                                <a href="{{ route('login') }}" class="nav-link">Вход</a>
-                        </li>
-                        @if (Route::has('register'))
+                <ul class="navbar-nav ml-auto">
+                    <!-- Authentication Links -->
+                    @guest
+                        @if (Route::has('login'))
                             <li class="nav-item">
-                                <a href="{{ route('register') }}" class="nav-link">Регистрация</a>
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                         @endif
-                        @endauth
-                    </ul>
-                @endif
+
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        @endif
+                    @else
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }}
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    @endguest
+                </ul>
             </div>
         </div>
     </nav>
