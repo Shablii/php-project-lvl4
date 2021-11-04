@@ -11,7 +11,8 @@
 <p>Описание:{{ $task->description }}</p>
 <p>Метки:</p>
 <ul>
-    <li>dgfgdfg</li>
-    <li>test1</li>
+    @foreach($task->labels as $label)
+    <li>{{ $label->name }}</li>
+    @endforeach
 </ul>
 @endsection

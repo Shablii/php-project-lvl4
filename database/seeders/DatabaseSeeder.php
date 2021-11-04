@@ -15,7 +15,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            TaskStatusTableSeeder::class
+            TaskStatusTableSeeder::class,
+            TaskSeeder::class,
+            LabelSeeder::class
         ]);
     }
 }

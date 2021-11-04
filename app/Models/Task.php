@@ -30,4 +30,9 @@ class Task extends Model
     {
         return $this->belongsTo('App\Models\TaskStatus');
     }
+
+    public function labels()
+    {
+        return $this->belongsToMany(Label::class, 'task_label');
+    }
 }

@@ -3,65 +3,70 @@
 namespace Tests\Feature;
 
 use App\Models\TaskStatus;
+use App\Models\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class TaskStatusTest extends TestCase
+class TasksTest extends TestCase
 {
     use RefreshDatabase;
 
-    public $status;
-    public array $data = ['name' => 'TaskStatusTest'];
+    public $task;
+    public array $data;
 
     public function setUp(): void
     {
         parent::setUp();
         $this->seed();
-
         $this->post(route('login'), ['email'=> 'test@mail.user', 'password' => 'testPass']);
 
-        $this->status = TaskStatus::where('name', 'в работе')->first();
+        $this->task = Task::where('name', 'newTask')->first();
+
+        $this->data = [
+            'name' => 'testTask',
+            'status_id' => TaskStatus::first()->id
+        ];
     }
 
     public function testIndex()
     {
-        $response = $this->get(route('task_statuses.index'));
-        $response->assertSee(TaskStatus::first()->name);
+        $response = $this->get(route('tasks.index'));
+        $response->assertSee(Task::first()->name);
     }
 
     public function testCreate()
     {
-        $response = $this->get(route('task_statuses.create'));
+        $response = $this->get(route('tasks.create'));
         $response->assertOk();
     }
 
     public function testStore()
     {
-        $response = $this->post(route('task_statuses.store'), $this->data);
+        $response = $this->post(route('tasks.store'), $this->data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
-        $this->assertDatabaseHas('task_statuses',  $this->data);
+        $this->assertDatabaseHas('tasks', $this->data);
     }
 
     public function testEdit()
     {
-        $response = $this->get(route('task_statuses.edit', $this->status));
+        $response = $this->get(route('tasks.edit', $this->task));
         $response->assertOk();
     }
 
     public function testUpdate()
     {
-        $response = $this->patch(route('task_statuses.update', $this->status),  $this->data);
+        $response = $this->patch(route('tasks.update', $this->task), $this->data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
-        $this->assertDatabaseHas('task_statuses',  $this->data);
+        $this->assertDatabaseHas('tasks', $this->data);
     }
 
     public function testDestroy()
     {
-        $response = $this->delete(route('task_statuses.destroy', $this->status));
+        $response = $this->delete(route('tasks.destroy', $this->task));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
-        $this->assertDatabaseMissing('task_statuses', ['name' => 'в работе']);
+        $this->assertDatabaseMissing('tasks', $this->data);
     }
 }

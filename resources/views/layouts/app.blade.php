@@ -35,8 +35,9 @@
                         >Статусы</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="https://php-l4-task-manager.herokuapp.com/labels">
-                            Метки                            </a>
+                        <a href="{{ route('labels.index') }}"
+                           class="nav-link{{ request()->routeIs('labels.index') ? ' active' : '' }}"
+                        >Метки</a>
                     </li>
                 </ul>
                 <!-- Right Side Of Navbar -->
