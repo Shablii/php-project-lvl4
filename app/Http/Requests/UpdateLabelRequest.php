@@ -39,7 +39,7 @@ class UpdateLabelRequest extends FormRequest
     {
         return [
             'name.required' => 'Это обязательное поле',
-            'name.unique' => 'Задача с таким именем уже существует',
+            'name.unique' => 'Метка с таким именем уже существует',
             'description.max' => 'слишком много текста'
         ];
     }
