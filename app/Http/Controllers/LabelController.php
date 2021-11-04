@@ -29,7 +29,7 @@ class LabelController extends Controller
         $label->fill($data);
         $label->save();
 
-        flash('Метка успешно создана ')->success();
+        flash('Метка успешно создана')->success();
         return redirect()->route('labels.index');
     }
 
@@ -45,7 +45,7 @@ class LabelController extends Controller
         $label->fill($data);
         $label->save();
 
-        flash('Метка успешно создана ')->success();
+        flash('Метка успешно изменена')->success();
         return redirect()->route('labels.index');
     }
 
