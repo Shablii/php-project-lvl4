@@ -140,6 +140,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'password' => [
+            'min' => 'Пароль должен иметь длину не менее 8 символов'
+        ]
     ],
 
     /*
