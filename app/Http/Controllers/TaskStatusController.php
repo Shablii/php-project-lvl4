@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreStatusRequest;
 use App\Models\TaskStatus;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class TaskStatusController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $statuses = TaskStatus::paginate(10);
         return view('statuses.index', compact('statuses'));
@@ -18,7 +20,7 @@ class TaskStatusController extends Controller
         return view('statuses.create', compact('status'));
     }
 
-    public function store(StoreStatusRequest $request)
+    public function store(StoreStatusRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
@@ -30,13 +32,13 @@ class TaskStatusController extends Controller
         return redirect()->route('task_statuses.index');
     }
 
-    public function edit($id)
+    public function edit(int $id): View
     {
         $status = TaskStatus::findOrFail($id);
         return view('statuses.edit', compact('status'));
     }
 
-    public function update(StoreStatusRequest $request, $id)
+    public function update(StoreStatusRequest $request, int $id): RedirectResponse
     {
         $status = TaskStatus::findOrFail($id);
 
@@ -46,7 +48,7 @@ class TaskStatusController extends Controller
         return redirect()->route('task_statuses.index');
     }
 
-    public function destroy($id)
+    public function destroy(int $id): RedirectResponse
     {
         $status = TaskStatus::findOrFail($id);
 

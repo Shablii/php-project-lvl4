@@ -7,7 +7,7 @@
 <h1 class="mb-5">Задачи</h1>
 <div class="d-flex">
     <div>
-        @include('tasks.serchForm')
+        @include('tasks.searchForm')
     </div>
     @if(Auth::check())
     <a href="{{ route('tasks.create') }}" class="btn btn-primary ml-auto">Создать задачу</a>

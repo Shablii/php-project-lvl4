@@ -8,14 +8,15 @@ use App\Models\Label;
 use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class TaskController extends Controller
 {
-    public function index(Request $request)
+    public function index(): View
     {
         $users = User::all()->pluck('name', 'id')->sort();
         $statuses = TaskStatus::all()->pluck('name', 'id')->sort();
@@ -30,7 +31,7 @@ class TaskController extends Controller
         return view('tasks.index', compact('tasks', 'users', 'statuses'));
     }
 
-    public function create(Task $task)
+    public function create(Task $task): View
     {
         $users = User::all()->pluck('name', 'id')->sort();
         $statuses = TaskStatus::all()->pluck('name', 'id')->sort();
@@ -39,7 +40,7 @@ class TaskController extends Controller
         return view('tasks.create', compact('task', 'users', 'statuses', 'labels'));
     }
 
-    public function store(StoreTaskRequest $request)
+    public function store(StoreTaskRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
@@ -49,7 +50,7 @@ class TaskController extends Controller
         $task->save();
 
         if (isset($data['labels'])) {
-            $labels = Label::find($data['labels']);
+            $labels = Label::findOrFail($data['labels']);
             $task->labels()->attach($labels);
         }
 
@@ -57,15 +58,13 @@ class TaskController extends Controller
         return redirect()->route('tasks.index');
     }
 
-    public function show(Task $task)
+    public function show(Task $task): View
     {
         return view('tasks.show', compact('task'));
     }
 
-    public function edit($id)
+    public function edit(Task $task)
     {
-        $task = Task::findOrFail($id);
-
         $users = User::all()->pluck('name', 'id')->sort();
         $statuses = TaskStatus::all()->pluck('name', 'id')->sort();
         $labels = Label::all()->pluck('name', 'id')->sort();
@@ -73,7 +72,7 @@ class TaskController extends Controller
         return view('tasks.edit', compact('task', 'users', 'statuses', 'labels'));
     }
 
-    public function update(UpdateTaskRequest $request, $id)
+    public function update(UpdateTaskRequest $request, $id): RedirectResponse
     {
         $task = Task::findOrFail($id);
         $data = $request->validated();
@@ -82,7 +81,7 @@ class TaskController extends Controller
         $task->save();
 
         if (isset($data['labels'])) {
-            $labels = Label::find($data['labels']);
+            $labels = Label::findOrFail($data['labels']);
             $task->labels()->detach();
             $task->labels()->attach($labels);
         }
@@ -91,7 +90,7 @@ class TaskController extends Controller
         return redirect()->route('tasks.index');
     }
 
-    public function destroy(Task $task)
+    public function destroy(Task $task): RedirectResponse
     {
         $task->labels()->detach();
         $task->delete();
