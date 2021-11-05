@@ -15,7 +15,7 @@ class LabelsTest extends TestCase
     /**
      * @var
      */
-    public $task;
+    public Label $label;
     public array $data;
 
     public function setUp(): void
@@ -24,7 +24,7 @@ class LabelsTest extends TestCase
         $this->seed();
         $this->post(route('login'), ['email' => 'test@mail.user', 'password' => 'testPass']);
 
-        $this->task = Task::where('name', 'newTask')->first();
+        $this->label = Label::where('name', 'newLabel')->first();
 
         $this->data = ['name' => 'testLabels'];
     }
@@ -51,13 +51,13 @@ class LabelsTest extends TestCase
 
     public function testEdit(): void
     {
-        $response = $this->get(route('labels.edit', $this->task));
+        $response = $this->get(route('labels.edit', $this->label));
         $response->assertOk();
     }
 
     public function testUpdate(): void
     {
-        $response = $this->patch(route('labels.update', $this->task), $this->data);
+        $response = $this->patch(route('labels.update', $this->label), $this->data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
         $this->assertDatabaseHas('labels', $this->data);
@@ -65,7 +65,7 @@ class LabelsTest extends TestCase
 
     public function testDestroy(): void
     {
-        $response = $this->delete(route('labels.destroy', $this->task));
+        $response = $this->delete(route('labels.destroy', $this->label));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
         $this->assertDatabaseMissing('labels', $this->data);

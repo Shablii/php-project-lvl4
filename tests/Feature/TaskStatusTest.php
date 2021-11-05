@@ -10,7 +10,10 @@ class TaskStatusTest extends TestCase
 {
     use RefreshDatabase;
 
-    public $status;
+    /**
+     * @var
+     */
+    public TaskStatus $status;
     public array $data = ['name' => 'TaskStatusTest'];
 
     public function setUp(): void

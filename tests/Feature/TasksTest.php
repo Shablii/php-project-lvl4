@@ -11,7 +11,7 @@ class TasksTest extends TestCase
 {
     use RefreshDatabase;
 
-    public $task;
+    public Task $task;
     public array $data;
 
     public function setUp(): void
@@ -24,14 +24,14 @@ class TasksTest extends TestCase
 
         $this->data = [
             'name' => 'testTask',
-            'status_id' => TaskStatus::first()->id
+            'status_id' => (int) TaskStatus::first()->id
         ];
     }
 
     public function testIndex(): void
     {
         $response = $this->get(route('tasks.index'));
-        $response->assertSee(Task::first()->name);
+        $response->assertSee((string) Task::first()->name);
     }
 
     public function testCreate(): void
