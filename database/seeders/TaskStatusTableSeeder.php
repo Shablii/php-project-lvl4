@@ -16,7 +16,7 @@ class TaskStatusTableSeeder extends Seeder
     {
         $statuses = ['новый', 'в работе', 'на тестировании'];
 
-        array_map (function($data) {
+        array_map(function ($data) {
             $status = new TaskStatus();
             if ($status->where('name', $data)->first() == null) {
                 $status->fill(['name' => $data]);
