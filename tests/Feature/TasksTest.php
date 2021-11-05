@@ -15,17 +15,20 @@ class TasksTest extends TestCase
     public Task $task;
     public array $data;
 
-    public function setUp(): mixed
+    public function setUp(): void
     {
         parent::setUp();
         $this->seed();
         $this->post(route('login'), ['email' => 'test@mail.user', 'password' => 'testPass']);
 
-        $this->task = Task::where('name', 'newTask')->first();
+        $task = Task::where('name', 'newTask')->first();
+        $statusId = TaskStatus::first()->id;
 
+        $this->task = $task;
+        
         $this->data = [
             'name' => 'testTask',
-            'status_id' => TaskStatus::first()->id
+            'status_id' => $statusId
         ];
     }
 

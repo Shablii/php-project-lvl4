@@ -15,7 +15,7 @@ class LabelsTest extends TestCase
     public Label $label;
     public array $data;
 
-    public function setUp(): mixed
+    public function setUp(): void
     {
         parent::setUp();
         $this->seed();
