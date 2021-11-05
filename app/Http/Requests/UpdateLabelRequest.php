@@ -31,7 +31,7 @@ class UpdateLabelRequest extends FormRequest
                 'required',
                 Rule::unique('labels')->ignore($this->label)
             ],
-            'description' =>'max:1500'
+            'description' => 'max:1500'
         ];
     }
 

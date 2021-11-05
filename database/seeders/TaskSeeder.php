@@ -16,12 +16,12 @@ class TaskSeeder extends Seeder
      */
     public function run()
     {
-        if(Task::where('name', 'newTask')->first() == null) {
+        if (Task::where('name', 'newTask')->first() == null) {
             Task::create([
                 'name' => 'newTask',
                 'status_id' => TaskStatus::first()->id,
                 'created_by_id' => User::first()->id
-           ]);
+            ]);
         }
     }
 }

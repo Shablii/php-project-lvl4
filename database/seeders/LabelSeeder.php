@@ -14,7 +14,7 @@ class LabelSeeder extends Seeder
      */
     public function run()
     {
-        if(Label::where('name', 'newLabel')->first() == null) {
+        if (Label::where('name', 'newLabel')->first() == null) {
             Label::create([
                 'name' => 'newLabel'
             ]);

@@ -18,10 +18,9 @@ class UserSeeder extends Seeder
         if (User::where('email', 'test@mail.user')->first() == null) {
             User::create([
                 'name' => 'testUser',
-                'email'=> 'test@mail.user',
+                'email' => 'test@mail.user',
                 'password' => Hash::make('testPass'),
             ]);
         }
-
     }
 }

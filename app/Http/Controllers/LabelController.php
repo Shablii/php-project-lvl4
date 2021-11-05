@@ -56,7 +56,6 @@ class LabelController extends Controller
 
             flash('Метка успешно удалена')->success();
             return redirect()->route('labels.index');
-
         }
 
         flash('Не удалось удалить метку')->error();

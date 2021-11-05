@@ -18,7 +18,7 @@ class TasksTest extends TestCase
     {
         parent::setUp();
         $this->seed();
-        $this->post(route('login'), ['email'=> 'test@mail.user', 'password' => 'testPass']);
+        $this->post(route('login'), ['email' => 'test@mail.user', 'password' => 'testPass']);
 
         $this->task = Task::where('name', 'newTask')->first();
 

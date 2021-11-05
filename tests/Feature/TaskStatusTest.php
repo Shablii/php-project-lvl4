@@ -18,7 +18,7 @@ class TaskStatusTest extends TestCase
         parent::setUp();
         $this->seed();
 
-        $this->post(route('login'), ['email'=> 'test@mail.user', 'password' => 'testPass']);
+        $this->post(route('login'), ['email' => 'test@mail.user', 'password' => 'testPass']);
 
         $this->status = TaskStatus::where('name', 'в работе')->first();
     }
@@ -40,7 +40,7 @@ class TaskStatusTest extends TestCase
         $response = $this->post(route('task_statuses.store'), $this->data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
-        $this->assertDatabaseHas('task_statuses',  $this->data);
+        $this->assertDatabaseHas('task_statuses', $this->data);
     }
 
     public function testEdit()
@@ -51,10 +51,10 @@ class TaskStatusTest extends TestCase
 
     public function testUpdate()
     {
-        $response = $this->patch(route('task_statuses.update', $this->status),  $this->data);
+        $response = $this->patch(route('task_statuses.update', $this->status), $this->data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
-        $this->assertDatabaseHas('task_statuses',  $this->data);
+        $this->assertDatabaseHas('task_statuses', $this->data);
     }
 
     public function testDestroy()

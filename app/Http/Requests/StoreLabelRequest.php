@@ -26,7 +26,7 @@ class StoreLabelRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:labels',
-            'description' =>'max:1500'
+            'description' => 'max:1500'
         ];
     }
 

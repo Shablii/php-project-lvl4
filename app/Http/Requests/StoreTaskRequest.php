@@ -34,7 +34,7 @@ class StoreTaskRequest extends FormRequest
             'name' => 'required|unique:tasks',
             'status_id' => 'required',
             'assigned_to_id' => Rule::in($usersId),
-            'description' =>'max:1500',
+            'description' => 'max:1500',
             'labels.*' => Rule::in($labelsId)
         ];
     }
