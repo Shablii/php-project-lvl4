@@ -28,15 +28,13 @@ class StoreTaskRequest extends FormRequest
     public function rules()
     {
         $usersId = User::all();
-        $usersId->pluck('id')->toArray();
-        $usersId[] = '';
-        $labelsId = Label::all()->pluck('id')->toArray();
+        $labelsId = Label::all();
         return [
             'name' => 'required|unique:tasks',
             'status_id' => 'required',
-            'assigned_to_id' => Rule::in($usersId),
+            'assigned_to_id' => [ Rule::in($usersId->pluck('id')->toArray()), 'nullable' ],
             'description' => 'max:1500',
-            'labels.*' => Rule::in($labelsId)
+            'labels.*' => Rule::in($labelsId->pluck('id')->toArray())
         ];
     }
 

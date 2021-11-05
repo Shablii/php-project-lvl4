@@ -18,6 +18,9 @@ class TaskController extends Controller
 {
     public function index(): View
     {
+        $users = User::all();
+        $statuses = TaskStatus::all()->pluck('name', 'id')->sort();
+
         $tasks = QueryBuilder::for(Task::class)
             ->allowedFilters([
                 AllowedFilter::exact('status_id'),
@@ -25,7 +28,7 @@ class TaskController extends Controller
                 AllowedFilter::exact('assigned_to_id'),
             ])->paginate(10);
 
-        return view('tasks.index', compact('tasks'));
+        return view('tasks.index', compact('tasks', 'users', 'statuses'));
     }
 
     public function create(Task $task): View
