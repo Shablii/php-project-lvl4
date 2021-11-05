@@ -14,7 +14,7 @@
 
     <div class="form-group">
         {{ Form::label('status_id', 'Статус') }}
-        {{ Form::select('status_id', $statuses, null,
+        {{ Form::select('status_id', $statuses->pluck('name', 'id')->sort(), null,
         ['class' => $errors->first('status_id') == null ? 'form-control' : 'form-control is-invalid', 'placeholder' => '----------']) }}
         @error('status_id')
         <div class="invalid-feedback">{{ $message }}</div>
@@ -23,12 +23,12 @@
 
     <div class="form-group">
         {{ Form::label('assigned_to_id', 'Исполнитель') }}
-        {{ Form::select('assigned_to_id', $users, null, ['class' => 'form-control', 'placeholder' => '----------']) }}
+        {{ Form::select('assigned_to_id', $users->pluck('name', 'id')->sort(), null, ['class' => 'form-control', 'placeholder' => '----------']) }}
     </div>
 
     <div class="form-group">
         {{ Form::label('labels', 'Метки') }}
-        {{ Form::select('labels', $labels, null, ['class' => 'form-control', 'multiple','name'=>'labels[]']) }}
+        {{ Form::select('labels', $labels->pluck('name', 'id')->sort(), null, ['class' => 'form-control', 'multiple','name'=>'labels[]']) }}
         @error('labels')
         <div>{{ $message }}</div>
         @enderror

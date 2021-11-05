@@ -12,6 +12,9 @@ class LabelsTest extends TestCase
 {
     use RefreshDatabase;
 
+    /**
+     * @var
+     */
     public $task;
     public array $data;
 
@@ -26,19 +29,19 @@ class LabelsTest extends TestCase
         $this->data = ['name' => 'testLabels'];
     }
 
-    public function testIndex()
+    public function testIndex(): void
     {
         $response = $this->get(route('labels.index'));
         $response->assertSee(Label::first()->name);
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $response = $this->get(route('labels.create'));
         $response->assertOk();
     }
 
-    public function testStore()
+    public function testStore(): void
     {
         $response = $this->post(route('labels.store'), $this->data);
         $response->assertSessionHasNoErrors();
@@ -46,13 +49,13 @@ class LabelsTest extends TestCase
         $this->assertDatabaseHas('labels', $this->data);
     }
 
-    public function testEdit()
+    public function testEdit(): void
     {
         $response = $this->get(route('labels.edit', $this->task));
         $response->assertOk();
     }
 
-    public function testUpdate()
+    public function testUpdate(): void
     {
         $response = $this->patch(route('labels.update', $this->task), $this->data);
         $response->assertSessionHasNoErrors();
@@ -60,7 +63,7 @@ class LabelsTest extends TestCase
         $this->assertDatabaseHas('labels', $this->data);
     }
 
-    public function testDestroy()
+    public function testDestroy(): void
     {
         $response = $this->delete(route('labels.destroy', $this->task));
         $response->assertSessionHasNoErrors();

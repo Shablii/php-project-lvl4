@@ -23,19 +23,19 @@ class TaskStatusTest extends TestCase
         $this->status = TaskStatus::where('name', 'в работе')->first();
     }
 
-    public function testIndex()
+    public function testIndex(): void
     {
         $response = $this->get(route('task_statuses.index'));
         $response->assertSee(TaskStatus::first()->name);
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $response = $this->get(route('task_statuses.create'));
         $response->assertOk();
     }
 
-    public function testStore()
+    public function testStore(): void
     {
         $response = $this->post(route('task_statuses.store'), $this->data);
         $response->assertSessionHasNoErrors();
@@ -43,13 +43,13 @@ class TaskStatusTest extends TestCase
         $this->assertDatabaseHas('task_statuses', $this->data);
     }
 
-    public function testEdit()
+    public function testEdit(): void
     {
         $response = $this->get(route('task_statuses.edit', $this->status));
         $response->assertOk();
     }
 
-    public function testUpdate()
+    public function testUpdate(): void
     {
         $response = $this->patch(route('task_statuses.update', $this->status), $this->data);
         $response->assertSessionHasNoErrors();
@@ -57,7 +57,7 @@ class TaskStatusTest extends TestCase
         $this->assertDatabaseHas('task_statuses', $this->data);
     }
 
-    public function testDestroy()
+    public function testDestroy(): void
     {
         $response = $this->delete(route('task_statuses.destroy', $this->status));
         $response->assertSessionHasNoErrors();

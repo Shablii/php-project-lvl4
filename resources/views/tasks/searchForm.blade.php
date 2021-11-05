@@ -1,6 +1,6 @@
 
 {{ Form::model($tasks, ['url' => route('tasks.store'), 'method' => 'GET', 'class' => "form-inline"]) }}
-        {{ Form::select('filter[status_id]', $statuses,
+        {{ Form::select('filter[status_id]', $statuses->pluck('name', 'id')->sort(),
             request()->input('filter.status_id'),
         ['class' => 'form-control mr-2', 'placeholder' => 'Статус']) }}
         {{ Form::select('filter[created_by_id]', $users->pluck('name', 'id')->sort(),

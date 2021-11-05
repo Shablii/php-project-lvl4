@@ -28,19 +28,19 @@ class TasksTest extends TestCase
         ];
     }
 
-    public function testIndex()
+    public function testIndex(): void
     {
         $response = $this->get(route('tasks.index'));
         $response->assertSee(Task::first()->name);
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $response = $this->get(route('tasks.create'));
         $response->assertOk();
     }
 
-    public function testStore()
+    public function testStore(): void
     {
         $response = $this->post(route('tasks.store'), $this->data);
         $response->assertSessionHasNoErrors();
@@ -48,13 +48,13 @@ class TasksTest extends TestCase
         $this->assertDatabaseHas('tasks', $this->data);
     }
 
-    public function testEdit()
+    public function testEdit(): void
     {
         $response = $this->get(route('tasks.edit', $this->task));
         $response->assertOk();
     }
 
-    public function testUpdate()
+    public function testUpdate(): void
     {
         $response = $this->patch(route('tasks.update', $this->task), $this->data);
         $response->assertSessionHasNoErrors();
@@ -62,7 +62,7 @@ class TasksTest extends TestCase
         $this->assertDatabaseHas('tasks', $this->data);
     }
 
-    public function testDestroy()
+    public function testDestroy(): void
     {
         $response = $this->delete(route('tasks.destroy', $this->task));
         $response->assertSessionHasNoErrors();

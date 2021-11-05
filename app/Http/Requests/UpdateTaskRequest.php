@@ -27,15 +27,14 @@ class UpdateTaskRequest extends FormRequest
      */
     public function rules()
     {
-        $usersId = User::all()->pluck('id')->toArray();
-        $usersId[] = '';
-        $labelsId = Label::all()->pluck('id')->toArray();
+        $usersId = User::all();
+        $labelsId = Label::all();
         return [
             'name' => 'required|unique:tasks,name,' . $this->task,
             'status_id' => 'required',
-            'assigned_to_id' => Rule::in($usersId),
+            'assigned_to_id' => Rule::in($usersId->pluck('id')->toArray()),
             'description' => 'max:1500',
-            'labels.*' => Rule::in($labelsId)
+            'labels.*' => Rule::in($labelsId->pluck('id')->toArray())
         ];
     }
 
@@ -44,7 +43,7 @@ class UpdateTaskRequest extends FormRequest
         return [
             'name.required' => 'Это обязательное поле',
             'name.unique' => 'Задача с таким именем уже существует',
-            'status_id.required' => 'Это обязательное поле',
+            'status_id.required' => 'Это обязательное поле'
         ];
     }
 }

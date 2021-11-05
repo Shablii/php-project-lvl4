@@ -19,7 +19,7 @@ class TaskController extends Controller
     public function index(): View
     {
         $users = User::all();
-        $statuses = TaskStatus::all()->pluck('name', 'id')->sort();
+        $statuses = TaskStatus::all();
 
         $tasks = QueryBuilder::for(Task::class)
             ->allowedFilters([
@@ -33,9 +33,9 @@ class TaskController extends Controller
 
     public function create(Task $task): View
     {
-        $users = User::all()->pluck('name', 'id')->sort();
-        $statuses = TaskStatus::all()->pluck('name', 'id')->sort();
-        $labels = Label::all()->pluck('name', 'id')->sort();
+        $users = User::all();
+        $statuses = TaskStatus::all();
+        $labels = Label::all();
 
         return view('tasks.create', compact('task', 'users', 'statuses', 'labels'));
     }
@@ -65,14 +65,14 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
-        $users = User::all()->pluck('name', 'id')->sort();
-        $statuses = TaskStatus::all()->pluck('name', 'id')->sort();
-        $labels = Label::all()->pluck('name', 'id')->sort();
+        $users = User::all();
+        $statuses = TaskStatus::all();
+        $labels = Label::all();
 
         return view('tasks.edit', compact('task', 'users', 'statuses', 'labels'));
     }
 
-    public function update(UpdateTaskRequest $request, $id): RedirectResponse
+    public function update(UpdateTaskRequest $request, int $id): RedirectResponse
     {
         $task = Task::findOrFail($id);
         $data = $request->validated();
