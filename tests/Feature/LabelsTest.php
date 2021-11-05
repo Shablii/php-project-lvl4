@@ -12,13 +12,10 @@ class LabelsTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @var
-     */
     public Label $label;
     public array $data;
 
-    public function setUp(): void
+    public function setUp(): mixed
     {
         parent::setUp();
         $this->seed();
