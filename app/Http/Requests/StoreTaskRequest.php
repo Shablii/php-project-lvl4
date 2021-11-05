@@ -27,7 +27,8 @@ class StoreTaskRequest extends FormRequest
      */
     public function rules()
     {
-        $usersId = User::all()->pluck('id')->toArray();
+        $usersId = User::all();
+        $usersId->pluck('id')->toArray();
         $usersId[] = '';
         $labelsId = Label::all()->pluck('id')->toArray();
         return [

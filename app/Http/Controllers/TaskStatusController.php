@@ -15,7 +15,7 @@ class TaskStatusController extends Controller
         return view('statuses.index', compact('statuses'));
     }
 
-    public function create(TaskStatus $status)
+    public function create(TaskStatus $status): View
     {
         return view('statuses.create', compact('status'));
     }
