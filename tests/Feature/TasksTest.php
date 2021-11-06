@@ -25,7 +25,7 @@ class TasksTest extends TestCase
         $statusId = TaskStatus::first()->id;
 
         $this->task = $task;
-        
+
         $this->data = [
             'name' => 'testTask',
             'status_id' => $statusId
