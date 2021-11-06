@@ -36,7 +36,7 @@ class TasksTest extends TestCase
     public function testIndex(): void
     {
         $response = $this->get(route('tasks.index'));
-        $response->assertSee( Task::first()->name);
+        $response->assertSee(Task::first()->name);
     }
 
     public function testCreate(): void
