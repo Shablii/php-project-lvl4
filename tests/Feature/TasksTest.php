@@ -12,8 +12,8 @@ class TasksTest extends TestCase
 {
     use RefreshDatabase;
 
-    public Mixed $task;
-    public Mixed $data;
+    public mixed $task;
+    public mixed $data;
 
     public function setUp(): void
     {
