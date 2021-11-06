@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\TaskStatus;
 use App\Models\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use phpDocumentor\Reflection\Types\Mixed_;
 use Tests\TestCase;
 
 class TasksTest extends TestCase
@@ -21,10 +20,12 @@ class TasksTest extends TestCase
         $this->seed();
         $this->post(route('login'), ['email' => 'test@mail.user', 'password' => 'testPass']);
 
-        $task = Task::where('name', 'newTask')->first();
+        //$task = Task::where('name', 'newTask')->first();
+        $task = new Task();
+
         $statusId = TaskStatus::first()->id;
 
-        $this->task = $task;
+        $this->task = $task->where('name', 'newTask')->first();
 
         $this->data = [
             'name' => 'testTask',
@@ -35,7 +36,7 @@ class TasksTest extends TestCase
     public function testIndex(): void
     {
         $response = $this->get(route('tasks.index'));
-        $response->assertSee((string) Task::first()->name);
+        $response->assertSee( Task::first()->name);
     }
 
     public function testCreate(): void
