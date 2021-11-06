@@ -23,8 +23,10 @@ class TasksTest extends TestCase
         //$task = Task::where('name', 'newTask')->first();
         $task = new Task();
 
+        /** @var TaskStatus */
         $statusId = TaskStatus::first()->id;
 
+        /** @var Task */
         $this->task = $task->where('name', 'newTask')->first();
 
         $this->data = [
