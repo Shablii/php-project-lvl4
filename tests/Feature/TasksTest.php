@@ -5,14 +5,15 @@ namespace Tests\Feature;
 use App\Models\TaskStatus;
 use App\Models\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use phpDocumentor\Reflection\Types\Mixed_;
 use Tests\TestCase;
 
 class TasksTest extends TestCase
 {
     use RefreshDatabase;
 
-    public Task $task;
-    public array $data;
+    public Mixed $task;
+    public Mixed $data;
 
     public function setUp(): void
     {
@@ -20,25 +21,18 @@ class TasksTest extends TestCase
         $this->seed();
         $this->post(route('login'), ['email' => 'test@mail.user', 'password' => 'testPass']);
 
-        //$task = Task::where('name', 'newTask')->first();
-        $task = new Task();
-
-        /** @var TaskStatus */
-        $statusId = TaskStatus::first()->id;
-
-        /** @var Task */
-        $this->task = $task->where('name', 'newTask')->first();
+        $this->task = Task::where('name', 'newTask')->first();
 
         $this->data = [
             'name' => 'testTask',
-            'status_id' => $statusId
+            'status_id' => TaskStatus::first()->id
         ];
     }
 
     public function testIndex(): void
     {
         $response = $this->get(route('tasks.index'));
-        $response->assertSee(Task::first()->name);
+        $response->assertSee((string) Task::first()->name);
     }
 
     public function testCreate(): void
