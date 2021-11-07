@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\TaskStatus;
 use App\Models\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use phpDocumentor\Reflection\Types\Mixed_;
 use Tests\TestCase;
 
 class TasksTest extends TestCase
@@ -14,17 +13,18 @@ class TasksTest extends TestCase
 
     public mixed $task;
     public mixed $data;
+    public mixed $stustus;
 
     public function setUp(): void
     {
         parent::setUp();
 
         $this->task = Task::where('name', 'newTask')->first();
-        $stustus = TaskStatus::first();
+        $this->stustus = TaskStatus::first();
 
         $this->data = [
             'name' => 'testTask',
-            'status_id' => $stustus->id
+            'status_id' =>  $this->stustus->id
         ];
     }
 
