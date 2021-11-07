@@ -18,8 +18,6 @@ class TasksTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->seed();
-        $this->post(route('login'), ['email' => 'test@mail.user', 'password' => 'testPass']);
 
         $this->task = Task::where('name', 'newTask')->first();
 
@@ -43,7 +41,7 @@ class TasksTest extends TestCase
 
     public function testStore(): void
     {
-        $response = $this->post(route('tasks.store'), $this->data);
+        $response = $this->actingAs($this->user)->post(route('tasks.store'), $this->data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
         $this->assertDatabaseHas('tasks', $this->data);
@@ -57,7 +55,7 @@ class TasksTest extends TestCase
 
     public function testUpdate(): void
     {
-        $response = $this->patch(route('tasks.update', $this->task), $this->data);
+        $response = $this->actingAs($this->user)->patch(route('tasks.update', $this->task), $this->data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
         $this->assertDatabaseHas('tasks', $this->data);

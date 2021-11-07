@@ -18,8 +18,6 @@ class LabelsTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->seed();
-        $this->post(route('login'), ['email' => 'test@mail.user', 'password' => 'testPass']);
 
         $this->label = Label::where('name', 'newLabel')->first();
 
@@ -28,8 +26,9 @@ class LabelsTest extends TestCase
 
     public function testIndex(): void
     {
+        $labelName = $this->label->name;
         $response = $this->get(route('labels.index'));
-        $response->assertSee(Label::first()->name);
+        $response->assertSee($labelName);
     }
 
     public function testCreate(): void
@@ -40,7 +39,7 @@ class LabelsTest extends TestCase
 
     public function testStore(): void
     {
-        $response = $this->post(route('labels.store'), $this->data);
+        $response = $this->actingAs($this->user)->post(route('labels.store'), $this->data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
         $this->assertDatabaseHas('labels', $this->data);
@@ -54,7 +53,7 @@ class LabelsTest extends TestCase
 
     public function testUpdate(): void
     {
-        $response = $this->patch(route('labels.update', $this->label), $this->data);
+        $response = $this->actingAs($this->user)->patch(route('labels.update', $this->label), $this->data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
         $this->assertDatabaseHas('labels', $this->data);
