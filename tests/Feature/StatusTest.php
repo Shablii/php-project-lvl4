@@ -6,7 +6,7 @@ use App\Models\TaskStatus;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class TaskStatusTest extends TestCase
+class StatusTest extends TestCase
 {
     use RefreshDatabase;
 

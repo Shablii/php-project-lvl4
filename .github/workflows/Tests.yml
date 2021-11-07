@@ -2,14 +2,14 @@ name: TestProject
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
-  Upload_repo: 
+  Upload_repo:
     runs-on: macos-latest
-    
+
     steps:
       - name: Upload repository
         uses: actions/checkout@v2

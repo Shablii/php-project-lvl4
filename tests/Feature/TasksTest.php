@@ -21,6 +21,11 @@ class TasksTest extends TestCase
 
         $this->task = Task::where('name', 'newTask')->first();
         $this->stustus = TaskStatus::first();
+
+        $this->data = [
+            'name' => 'testTask',
+            'status_id' =>  $this->stustus->id
+        ];
     }
 
     public function testIndex(): void
@@ -38,11 +43,6 @@ class TasksTest extends TestCase
 
     public function testStore(): void
     {
-        $this->data = [
-            'name' => 'testTask',
-            'status_id' =>  $this->stustus->id
-        ];
-
         $response = $this->actingAs($this->user)->post(route('tasks.store'), $this->data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
@@ -57,11 +57,6 @@ class TasksTest extends TestCase
 
     public function testUpdate(): void
     {
-        $this->data = [
-            'name' => 'testTask',
-            'status_id' =>  $this->stustus->id
-        ];
-
         $response = $this->actingAs($this->user)->patch(route('tasks.update', $this->task), $this->data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
@@ -70,15 +65,11 @@ class TasksTest extends TestCase
 
     public function testDestroy(): void
     {
-        $this->data = [
-            'name' => 'testTask',
-            'status_id' =>  $this->stustus->id
-        ];
         $taskName = $this->task->name;
 
         $response = $this->delete(route('tasks.destroy', $this->task));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
-        $this->assertDatabaseMissing('tasks', $taskName);
+        $this->assertDatabaseMissing('tasks', ['name' => $taskName]);
     }
 }
