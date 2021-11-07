@@ -12,8 +12,8 @@ class LabelsTest extends TestCase
 {
     use RefreshDatabase;
 
-    public Label $label;
-    public array $data;
+    public mixed $label;
+    public mixed $data;
 
     public function setUp(): void
     {
