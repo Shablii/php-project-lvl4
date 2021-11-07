@@ -20,17 +20,19 @@ class TasksTest extends TestCase
         parent::setUp();
 
         $this->task = Task::where('name', 'newTask')->first();
+        $stustus = TaskStatus::first();
 
         $this->data = [
             'name' => 'testTask',
-            'status_id' => TaskStatus::first()->id
+            'status_id' => $stustus->id
         ];
     }
 
     public function testIndex(): void
     {
+        $taskName = $this->task->name;
         $response = $this->get(route('tasks.index'));
-        $response->assertSee((string) Task::first()->name);
+        $response->assertSee($taskName);
     }
 
     public function testCreate(): void

@@ -11,22 +11,20 @@ class TaskStatusTest extends TestCase
     use RefreshDatabase;
 
     public mixed $status;
-    public mixed $data = ['name' => 'TaskStatusTest'];
+    public array $data = ['name' => 'TaskStatusTest'];
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->seed();
-
-        $this->post(route('login'), ['email' => 'test@mail.user', 'password' => 'testPass']);
 
         $this->status = TaskStatus::where('name', 'в работе')->first();
     }
 
     public function testIndex(): void
     {
+        $statusName = $this->status->name;
         $response = $this->get(route('task_statuses.index'));
-        $response->assertSee(TaskStatus::first()->name);
+        $response->assertSee($statusName);
     }
 
     public function testCreate(): void
@@ -37,7 +35,7 @@ class TaskStatusTest extends TestCase
 
     public function testStore(): void
     {
-        $response = $this->post(route('task_statuses.store'), $this->data);
+        $response = $this->actingAs($this->user)->post(route('task_statuses.store'), $this->data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
         $this->assertDatabaseHas('task_statuses', $this->data);
@@ -51,7 +49,7 @@ class TaskStatusTest extends TestCase
 
     public function testUpdate(): void
     {
-        $response = $this->patch(route('task_statuses.update', $this->status), $this->data);
+        $response = $this->actingAs($this->user)->patch(route('task_statuses.update', $this->status), $this->data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
         $this->assertDatabaseHas('task_statuses', $this->data);
