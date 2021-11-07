@@ -13,7 +13,7 @@ abstract class TestCase extends BaseTestCase
     use WithFaker;
     use RefreshDatabase;
 
-    protected User $user;
+    protected mixed $user;
 
     public function setUp(): void
     {
