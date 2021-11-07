@@ -75,7 +75,7 @@ class TasksTest extends TestCase
             'status_id' =>  $this->stustus->id
         ];
         $taskName = $this->task->name;
-        
+
         $response = $this->delete(route('tasks.destroy', $this->task));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
