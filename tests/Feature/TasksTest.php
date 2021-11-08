@@ -61,7 +61,7 @@ class TasksTest extends TestCase
             'name' => 'testTask',
             'status_id' =>  $this->stustus->id
         ];
-        
+
         $response = $this->actingAs($this->user)->patch(route('tasks.update', $this->task), $this->data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
