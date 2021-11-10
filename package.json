@@ -23,14 +23,5 @@
     },
     "dependencies": {
         "@rails/ujs": "^6.1.4-1"
-<<<<<<< HEAD
-    },
-    "name": "lvl4",
-    "description": "a really cool app",
-    "version": "1.0.0",
-    "engines": {
-        "node": "14.x"
-=======
->>>>>>> 5e0f056 (test heroku)
     }
 }
