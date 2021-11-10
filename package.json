@@ -22,12 +22,6 @@
         "sass": "^1.32.11",
         "sass-loader": "^11.0.1"
     },
-    "name": "myapp",
-    "description": "a really cool app",
-    "version": "1.0.0",
-    "engines": {
-        "node": "14.x"
-    },
     "dependencies": {
         "@rails/ujs": "^6.1.4-1"
     }
