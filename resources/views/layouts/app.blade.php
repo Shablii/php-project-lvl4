@@ -11,6 +11,7 @@
     <!-- Styles -->
 <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
     <link href="https://php-l4-task-manager.herokuapp.com/css/app.css" rel="stylesheet">
+    <script src="{{ asset('js/app.js') }}"></script>
 
 </head>
 <body>
