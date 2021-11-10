@@ -5,7 +5,7 @@
 
 [![TestProject](https://github.com/Shablii/php-project-lvl4/actions/workflows/Tests.yml/badge.svg)](https://github.com/Shablii/php-project-lvl4/actions/workflows/Tests.yml)
 ##
-[ссылка проект](https://lvl4.herokuapp.com)
+[ссылка проект](http://lvl4.herokuapp.com)
 
 #
 Что бы установить используйте "make setup" в корте проекта
