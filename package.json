@@ -7,8 +7,7 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production",
-        "postinstall": "npm run prod"
+        "production": "mix --production"
     },
     "devDependencies": {
         "axios": "^0.21",
@@ -24,11 +23,14 @@
     },
     "dependencies": {
         "@rails/ujs": "^6.1.4-1"
+<<<<<<< HEAD
     },
     "name": "lvl4",
     "description": "a really cool app",
     "version": "1.0.0",
     "engines": {
         "node": "14.x"
+=======
+>>>>>>> 5e0f056 (test heroku)
     }
 }
