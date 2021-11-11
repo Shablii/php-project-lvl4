@@ -5,12 +5,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="csrf-param" content="_token" />
 
-
     <title>Менеджер задач</title>
 
     <!-- Styles -->
-<!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
-    <link href="https://php-l4-task-manager.herokuapp.com/css/app.css" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script src="{{ asset('js/app.js') }}"></script>
 
 </head>
