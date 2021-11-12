@@ -10,21 +10,9 @@ class HomePageTest extends TestCase
 {
     use RefreshDatabase;
 
-    public mixed $status;
-    public array $data = ['name' => 'TaskStatusTest'];
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->status = TaskStatus::where('name', 'в работе')->first();
-    }
-
     public function testHome(): void
     {
         $response = $this->get(route('welcome'));
         $response->assertOk();
     }
-
-
 }
