@@ -3,8 +3,6 @@
 namespace Tests\Feature;
 
 use App\Models\Label;
-use App\Models\TaskStatus;
-use App\Models\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -12,7 +10,7 @@ class LabelsTest extends TestCase
 {
     use RefreshDatabase;
 
-    public mixed $label;
+    public Label $label;
     public mixed $data;
 
     public function setUp(): void
