@@ -10,7 +10,7 @@ class StatusTest extends TestCase
 {
     use RefreshDatabase;
 
-    public TaskStatus $status;
+    public mixed $status;
 
     public function setUp(): void
     {
