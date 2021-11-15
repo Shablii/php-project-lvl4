@@ -19,7 +19,6 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
-        $this->seed();
-        $this->user = User::where('name', 'testUser')->first();
+        $this->user = User::factory()->create();
     }
 }

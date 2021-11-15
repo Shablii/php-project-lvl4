@@ -11,16 +11,15 @@ class TasksTest extends TestCase
 {
     use RefreshDatabase;
 
-    public mixed $task;
-    public mixed $data;
-    public mixed $stustus;
+    public Task $task;
+    public TaskStatus $status;
 
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->task = Task::where('name', 'newTask')->first();
-        $this->stustus = TaskStatus::first();
+        $this->task = Task::factory()->create();
+        $this->status = TaskStatus::factory()->create();
     }
 
     public function testIndex(): void
@@ -40,7 +39,7 @@ class TasksTest extends TestCase
     {
         $this->data = [
             'name' => 'testTask',
-            'status_id' =>  $this->stustus->id
+            'status_id' =>  $this->status->id
         ];
 
         $response = $this->actingAs($this->user)->post(route('tasks.store'), $this->data);
@@ -59,7 +58,7 @@ class TasksTest extends TestCase
     {
         $this->data = [
             'name' => 'testTask',
-            'status_id' =>  $this->stustus->id
+            'status_id' =>  $this->status->id
         ];
 
         $response = $this->actingAs($this->user)->patch(route('tasks.update', $this->task), $this->data);

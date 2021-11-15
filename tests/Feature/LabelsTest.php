@@ -11,15 +11,12 @@ class LabelsTest extends TestCase
     use RefreshDatabase;
 
     public Label $label;
-    public mixed $data;
 
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->label = Label::where('name', 'newLabel')->first();
-
-        $this->data = ['name' => 'testLabels'];
+        $this->label = Label::factory()->create();
     }
 
     public function testIndex(): void
@@ -37,10 +34,11 @@ class LabelsTest extends TestCase
 
     public function testStore(): void
     {
-        $response = $this->actingAs($this->user)->post(route('labels.store'), $this->data);
+        $data = ['name' => 'testLabels'];
+        $response = $this->actingAs($this->user)->post(route('labels.store'), $data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
-        $this->assertDatabaseHas('labels', $this->data);
+        $this->assertDatabaseHas('labels', $data);
     }
 
     public function testEdit(): void
@@ -51,17 +49,19 @@ class LabelsTest extends TestCase
 
     public function testUpdate(): void
     {
-        $response = $this->actingAs($this->user)->patch(route('labels.update', $this->label), $this->data);
+        $data = ['name' => 'testLabels'];
+        $response = $this->actingAs($this->user)->patch(route('labels.update', $this->label), $data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
-        $this->assertDatabaseHas('labels', $this->data);
+        $this->assertDatabaseHas('labels', $data);
     }
 
     public function testDestroy(): void
     {
+        $labelName = $this->label->name;
         $response = $this->delete(route('labels.destroy', $this->label));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
-        $this->assertDatabaseMissing('labels', $this->data);
+        $this->assertDatabaseMissing('labels', ['name' => $labelName]);
     }
 }

@@ -2,10 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\TaskStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class TaskStatusFactory extends Factory
+class LabelFactory extends Factory
 {
     /**
      * Define the model's default state.

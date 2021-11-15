@@ -10,14 +10,13 @@ class StatusTest extends TestCase
 {
     use RefreshDatabase;
 
-    public mixed $status;
-    public array $data = ['name' => 'TaskStatusTest'];
+    public TaskStatus $status;
 
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->status = TaskStatus::where('name', 'в работе')->first();
+        $this->status = TaskStatus::factory()->create();
     }
 
     public function testIndex(): void
@@ -35,10 +34,11 @@ class StatusTest extends TestCase
 
     public function testStore(): void
     {
-        $response = $this->actingAs($this->user)->post(route('task_statuses.store'), $this->data);
+        $data = ['name' => 'TaskStatusTest'];
+        $response = $this->actingAs($this->user)->post(route('task_statuses.store'), $data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
-        $this->assertDatabaseHas('task_statuses', $this->data);
+        $this->assertDatabaseHas('task_statuses', $data);
     }
 
     public function testEdit(): void
@@ -49,17 +49,19 @@ class StatusTest extends TestCase
 
     public function testUpdate(): void
     {
-        $response = $this->actingAs($this->user)->patch(route('task_statuses.update', $this->status), $this->data);
+        $data = ['name' => 'TaskStatusTest'];
+        $response = $this->actingAs($this->user)->patch(route('task_statuses.update', $this->status), $data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
-        $this->assertDatabaseHas('task_statuses', $this->data);
+        $this->assertDatabaseHas('task_statuses', $data);
     }
 
     public function testDestroy(): void
     {
+        $name = $this->status->name;
         $response = $this->delete(route('task_statuses.destroy', $this->status));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
-        $this->assertDatabaseMissing('task_statuses', ['name' => 'в работе']);
+        $this->assertDatabaseMissing('task_statuses', ['name' => $name]);
     }
 }
