@@ -37,15 +37,15 @@ class TasksTest extends TestCase
 
     public function testStore(): void
     {
-        $this->data = [
+        $data = [
             'name' => 'testTask',
             'status_id' =>  $this->status->id
         ];
 
-        $response = $this->actingAs($this->user)->post(route('tasks.store'), $this->data);
+        $response = $this->actingAs($this->user)->post(route('tasks.store'), $data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
-        $this->assertDatabaseHas('tasks', $this->data);
+        $this->assertDatabaseHas('tasks', $data);
     }
 
     public function testEdit(): void
@@ -56,15 +56,15 @@ class TasksTest extends TestCase
 
     public function testUpdate(): void
     {
-        $this->data = [
+        $data = [
             'name' => 'testTask',
             'status_id' =>  $this->status->id
         ];
 
-        $response = $this->actingAs($this->user)->patch(route('tasks.update', $this->task), $this->data);
+        $response = $this->actingAs($this->user)->patch(route('tasks.update', $this->task), $data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
-        $this->assertDatabaseHas('tasks', $this->data);
+        $this->assertDatabaseHas('tasks', $data);
     }
 
     public function testDestroy(): void
