@@ -1,4 +1,7 @@
 #Makefile
+
+$PWD := "$$PWD"
+
 start:
 	php artisan serve
 lint:
@@ -10,8 +13,9 @@ test-coverage:
 setup:
 	composer install
 	php -r "file_exists('.env') || copy('.env.example', '.env');"
-    $PWD/database/database.sqlite>>.env
-    touch database/database.sqlite
+	php -r "file_put_contents('.env', 'DB_DATABASE=$(PWD)/database/database.sqlite', FILE_APPEND);"
+	touch database/database.sqlite
+	php artisan migrate
 	php artisan key:generate
 deploy:
 	git push heroku
