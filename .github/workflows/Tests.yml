@@ -26,13 +26,13 @@ jobs:
         run: make lint
 
       - name: Tests
-        run: test_phpunit
+        run: make test_phpunit
 
       - name: Run tests with coverage
         uses: paambaati/codeclimate-action@v3.0.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
-          coverageCommand: test_phpunit
+          coverageCommand: make test
           coverageLocations: ${{github.workplace}}/clover.xml:clover
           debug: true
