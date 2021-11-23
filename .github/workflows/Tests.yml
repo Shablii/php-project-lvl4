@@ -14,11 +14,19 @@ jobs:
       - name: Upload repository
         uses: actions/checkout@v2
 
+      - name: Setup PHP Action
+          uses: shivammathur/setup-php@2.15.0
+          with:
+            php-version: '8.0'
+
       - name: Sepup
         run: make setup
 
       - name: Check lint
         run: make lint
+
+      - name: Tests
+        run: test_phpunit
 
       - name: Run tests with coverage
         uses: paambaati/codeclimate-action@v3.0.0
