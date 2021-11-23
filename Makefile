@@ -5,7 +5,7 @@ $PWD := "$$PWD"
 start:
 	php artisan serve
 lint:
-	composer run-script phpcs -- --standard=PSR12 app tests
+	composer phpcs
 test:
 	php artisan test
 test-coverage:

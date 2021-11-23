@@ -38,7 +38,7 @@ class TasksTest extends TestCase
     public function testStore(): void
     {
         $data = [
-            'name' => 'testTask',
+            'name' => $this->faker->name(),
             'status_id' =>  $this->status->id
         ];
 
@@ -57,7 +57,7 @@ class TasksTest extends TestCase
     public function testUpdate(): void
     {
         $data = [
-            'name' => 'testTask',
+            'name' => $this->faker->name(),
             'status_id' =>  $this->status->id
         ];
 

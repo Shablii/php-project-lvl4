@@ -34,7 +34,7 @@ class StatusTest extends TestCase
 
     public function testStore(): void
     {
-        $data = ['name' => 'TaskStatusTest'];
+        $data = ['name' => $this->faker->name()];
         $response = $this->actingAs($this->user)->post(route('task_statuses.store'), $data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
@@ -49,7 +49,7 @@ class StatusTest extends TestCase
 
     public function testUpdate(): void
     {
-        $data = ['name' => 'TaskStatusTest'];
+        $data = ['name' => $this->faker->name()];
         $response = $this->actingAs($this->user)->patch(route('task_statuses.update', $this->status), $data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();

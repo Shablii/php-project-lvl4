@@ -34,7 +34,7 @@ class LabelsTest extends TestCase
 
     public function testStore(): void
     {
-        $data = ['name' => 'testLabels'];
+        $data = ['name' => $this->faker->name()];
         $response = $this->actingAs($this->user)->post(route('labels.store'), $data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
@@ -49,7 +49,7 @@ class LabelsTest extends TestCase
 
     public function testUpdate(): void
     {
-        $data = ['name' => 'testLabels'];
+        $data = ['name' => $this->faker->name()];
         $response = $this->actingAs($this->user)->patch(route('labels.update', $this->label), $data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();

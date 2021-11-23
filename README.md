@@ -5,21 +5,23 @@
 
 [![TestProject](https://github.com/Shablii/php-project-lvl4/actions/workflows/Tests.yml/badge.svg)](https://github.com/Shablii/php-project-lvl4/actions/workflows/Tests.yml)
 
-##Что бы установить необходимо:
-- скачать проект: 
-> git clone git@github.com:Shablii/php-project-lvl4.git
-- перейти в папку с проектом:
-> cd php-project-lvl4
-- установить:
-> make setup
+## Предварительные требования
 
-Что бы локально запустить используйте  в корне проекта
-> make start
+- PHP ^8.0
+- Composer
+- Node.js (v14+) & NPM (6+)
+- SQLite для локального запуска, PostgreSQL для продакшена
 
-###Требования:
-PHP 8/node 6.14.15
+### Установка:
+- скачать проект `git clone git@github.com:Shablii/php-project-lvl4.git`
+- перейти в папку с проектом `cd php-project-lvl4`
+- установить `make setup`
 
-###[ссылка на проект](http://lvl4.herokuapp.com)
+Что бы локально запустить проект `make start`
+
+ 
+
+### [ссылка на проект](http://lvl4.herokuapp.com)
 
 
 
