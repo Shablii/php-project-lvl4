@@ -17,8 +17,7 @@ setup:
 	touch database/database.sqlite
 	php artisan migrate
 	php artisan key:generate
-	npm install
-	npm run prod
+	npm ci
 deploy:
 	git push heroku
 
