@@ -5,6 +5,8 @@
 
 [![TestProject](https://github.com/Shablii/php-project-lvl4/actions/workflows/Tests.yml/badge.svg)](https://github.com/Shablii/php-project-lvl4/actions/workflows/Tests.yml)
 
+[![Test Coverage](https://api.codeclimate.com/v1/badges/d9ac339ab403823ff84d/test_coverage)](https://codeclimate.com/github/Shablii/php-project-lvl4/test_coverage)
+
 ## Предварительные требования
 
 - PHP ^8.0
