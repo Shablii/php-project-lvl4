@@ -22,9 +22,9 @@
         <th>Автор</th>
         <th>Исполнитель</th>
         <th>Дата создания</th>
-        @if(Auth::check())
+        @auth
         <th>Действия</th>
-        @endif
+        @endauth
     </tr>
     </thead>
     @foreach($tasks as $task)
@@ -35,17 +35,17 @@
         <td>{{ $task->createdBy->name }}</td>
         <td>{{ $task->assignedTo?->name }}</td>
         <td>{{ $task->created_at->format('d.m.Y') }}</td>
-        @if(Auth::check())
+        @auth
         <td>
-                @if(Auth::id() == $task->created_by_id)
+            @can('delete', $task)
             <a href="{{ route('tasks.destroy', $task->id) }}"
                data-method="delete"
                data-confirm="Вы уверены?"
                class="text-danger">Удалить</a>
-                @endif
+            @endcan
             <a href="{{ route('tasks.edit', $task->id) }}">Изменить</a>
         </td>
-        @endif
+        @endauth
     </tr>
     @endforeach
 </table>

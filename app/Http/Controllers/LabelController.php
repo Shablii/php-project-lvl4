@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreLabelRequest;
-use App\Http\Requests\UpdateLabelRequest;
+use App\Http\Requests\LabelRequest;
 use App\Models\Label;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -21,7 +20,7 @@ class LabelController extends Controller
         return view('labels.create', compact('label'));
     }
 
-    public function store(StoreLabelRequest $request): RedirectResponse
+    public function store(LabelRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
@@ -38,7 +37,7 @@ class LabelController extends Controller
         return view('labels.edit', compact('label'));
     }
 
-    public function update(UpdateLabelRequest $request, Label $label): RedirectResponse
+    public function update(LabelRequest $request, Label $label): RedirectResponse
     {
         $data = $request->validated();
 

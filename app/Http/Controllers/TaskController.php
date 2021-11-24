@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreTaskRequest;
-use App\Http\Requests\UpdateTaskRequest;
+use App\Http\Requests\TaskRequest;
 use App\Models\Label;
 use App\Models\Task;
 use App\Models\TaskStatus;
@@ -42,7 +41,7 @@ class TaskController extends Controller
         return view('tasks.create', compact('task', 'users', 'statuses', 'labels'));
     }
 
-    public function store(StoreTaskRequest $request): RedirectResponse
+    public function store(TaskRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
@@ -74,7 +73,7 @@ class TaskController extends Controller
         return view('tasks.edit', compact('task', 'users', 'statuses', 'labels'));
     }
 
-    public function update(UpdateTaskRequest $request, int $id): RedirectResponse
+    public function update(TaskRequest $request, int $id): RedirectResponse
     {
         $task = Task::findOrFail($id);
         $data = $request->validated();

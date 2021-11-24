@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreStatusRequest;
+use App\Http\Requests\StatusRequest;
 use App\Models\TaskStatus;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -20,7 +20,7 @@ class TaskStatusController extends Controller
         return view('statuses.create', compact('status'));
     }
 
-    public function store(StoreStatusRequest $request): RedirectResponse
+    public function store(StatusRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
@@ -38,7 +38,7 @@ class TaskStatusController extends Controller
         return view('statuses.edit', compact('status'));
     }
 
-    public function update(StoreStatusRequest $request, int $id): RedirectResponse
+    public function update(StatusRequest $request, int $id): RedirectResponse
     {
         $status = TaskStatus::findOrFail($id);
 
