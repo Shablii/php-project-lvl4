@@ -33,6 +33,6 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
-          coverageCommand: make test_phpunit
+          coverageCommand: make test
           coverageLocations: ${{github.workplace}}/clover.xml:clover
           debug: true
