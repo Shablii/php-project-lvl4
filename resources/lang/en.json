@@ -27,7 +27,7 @@
     "Actions": "Действия",
     "Change": "Изменить",
     "View a task": "Просмотр задачи",
-    "Hello": "Привет",
+    "Hello": "Привет от Хекслета!",
     "Task manager": "Менеджер задач",
     "Link to gitHab": "Ссылка на gitHab",
     "Create status": "Создать статус",
@@ -36,5 +36,4 @@
     "Are you sure?": "Вы уверены?",
     "Create Label": "Создать метку",
     "Change label": "Изменение метки"
-
 }
