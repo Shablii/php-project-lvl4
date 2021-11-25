@@ -13,7 +13,6 @@ test-coverage:
 setup:
 	composer install
 	php -r "file_exists('.env') || copy('.env.example', '.env');"
-	php -r "file_put_contents('.env', 'DB_DATABASE=$(PWD)/database/database.sqlite', FILE_APPEND);"
 	touch database/database.sqlite
 	php artisan migrate
 	php artisan key:generate
