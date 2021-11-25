@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Label;
-use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -27,14 +25,15 @@ class TaskRequest extends FormRequest
      */
     public function rules()
     {
-        $usersId = User::all();
-        $labelsId = Label::all();
         return [
-            'name' => 'required|unique:tasks,name,' . $this->task,
-            'status_id' => 'required',
-            'assigned_to_id' => Rule::in($usersId->pluck('id')->toArray()),
-            'description' => 'max:1500',
-            'labels.*' => Rule::in($labelsId->pluck('id')->toArray())
+            'name' => [
+                'required',
+                Rule::unique('tasks', 'name')->ignore($this->task)
+            ],
+            'description' => 'nullable|string|max:1000',
+            'status_id' => 'required|exists:task_statuses,id',
+            'assigned_to_id' => 'nullable|exists:users,id',
+            'labels.*' => 'nullable|int|exists:labels,id'
         ];
     }
 

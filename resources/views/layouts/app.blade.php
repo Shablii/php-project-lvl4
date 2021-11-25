@@ -28,17 +28,17 @@
                     <li class="nav-item">
                         <a href="{{ route('tasks.index') }}"
                            class="nav-link{{ request()->routeIs('tasks.index') ? ' active' : '' }}"
-                        >Задачи</a>
+                        >{{__('Tasks')}}</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('task_statuses.index') }}"
                            class="nav-link{{ request()->routeIs('task_statuses.index') ? ' active' : '' }}"
-                        >Статусы</a>
+                        >{{__('Statuses')}}</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('labels.index') }}"
                            class="nav-link{{ request()->routeIs('labels.index') ? ' active' : '' }}"
-                        >Метки</a>
+                        >{{__('Labels')}}</a>
                     </li>
                 </ul>
                 <!-- Right Side Of Navbar -->

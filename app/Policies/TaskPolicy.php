@@ -18,7 +18,7 @@ class TaskPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class TaskPolicy
      */
     public function view(User $user, Task $task)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class TaskPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class TaskPolicy
      */
     public function update(User $user, Task $task)
     {
-        //
+        return true;
     }
 
     /**
@@ -76,18 +76,6 @@ class TaskPolicy
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function restore(User $user, Task $task)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, Task $task)
     {
         //
     }

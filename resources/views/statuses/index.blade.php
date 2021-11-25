@@ -4,19 +4,19 @@
 
 @include('flash::message')
 
-    <h1 class="mb-5">Статусы</h1>
-    @if(Auth::check())
+    <h1 class="mb-5">{{__('Statuses')}}</h1>
+    @auth
     <a href="{{ route('task_statuses.create') }}" class="btn btn-primary">Создать статус</a>
-    @endif
+    @endauth
     <table class="table mt-2">
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Имя</th>
-            <th>Дата создания</th>
-            @if(Auth::check())
-            <th>Действия</th>
-            @endif
+            <th>{{__('ID')}}</th>
+            <th>{{__('Name')}}</th>
+            <th>{{__('Date of creation')}}</th>
+            @auth
+                <th>{{__('Actions')}}</th>
+            @endauth
         </tr>
         </thead>
         @foreach($statuses as $status)
@@ -24,15 +24,15 @@
                 <td>{{ $status->id }}</td>
                 <td>{{ $status->name }}</td>
                 <td>{{ $status->created_at->format('d.m.Y') }}</td>
-                @if(Auth::check())
+                @auth
                 <td>
-                    <a href="{{ route('task_statuses.destroy', $status->id) }}"
+                    <a href="{{ route('task_statuses.destroy', $status) }}"
                        data-method="delete"
-                       data-confirm="Вы уверены?"
+                       data-confirm="{{__('Are you sure?')}}"
                        class="text-danger">Удалить</a>
-                    <a href="{{ route('task_statuses.edit', $status->id) }}">Изменить</a>
+                    <a href="{{ route('task_statuses.edit', $status) }}">{{__('Change')}}</a>
                 </td>
-                @endif
+                @endauth
             </tr>
         @endforeach
     </table>

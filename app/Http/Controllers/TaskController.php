@@ -43,6 +43,7 @@ class TaskController extends Controller
 
     public function store(TaskRequest $request): RedirectResponse
     {
+        //dd($request);
         $data = $request->validated();
 
         $task = new Task();

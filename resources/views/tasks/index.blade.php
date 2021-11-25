@@ -4,26 +4,26 @@
 
 @include('flash::message')
 
-<h1 class="mb-5">Задачи</h1>
+<h1 class="mb-5">{{__('Tasks')}}</h1>
 <div class="d-flex">
     <div>
         @include('tasks.searchForm')
     </div>
-    @if(Auth::check())
-    <a href="{{ route('tasks.create') }}" class="btn btn-primary ml-auto">Создать задачу</a>
-    @endif
+    @auth
+    <a href="{{ route('tasks.create') }}" class="btn btn-primary ml-auto">{{__('Create task')}}</a>
+    @endauth
 </div>
 <table class="table mt-2">
     <thead>
     <tr>
-        <th>ID</th>
-        <th>Статус</th>
-        <th>Имя</th>
-        <th>Автор</th>
-        <th>Исполнитель</th>
-        <th>Дата создания</th>
+        <th>{{__('ID')}}</th>
+        <th>{{__('Status')}}</th>
+        <th>{{__('Name')}}</th>
+        <th>{{__('Author')}}</th>
+        <th>{{__('Assigned')}}</th>
+        <th>{{__('Date of creation')}}</th>
         @auth
-        <th>Действия</th>
+            <th>{{__('Actions')}}</th>
         @endauth
     </tr>
     </thead>
@@ -38,12 +38,12 @@
         @auth
         <td>
             @can('delete', $task)
-            <a href="{{ route('tasks.destroy', $task->id) }}"
+            <a href="{{ route('tasks.destroy', $task) }}"
                data-method="delete"
-               data-confirm="Вы уверены?"
+               data-confirm="{{__('Are you sure?')}}"
                class="text-danger">Удалить</a>
             @endcan
-            <a href="{{ route('tasks.edit', $task->id) }}">Изменить</a>
+            <a href="{{ route('tasks.edit', $task) }}">{{__('Change')}}</a>
         </td>
         @endauth
     </tr>

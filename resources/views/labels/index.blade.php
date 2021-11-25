@@ -5,19 +5,19 @@
     @include('flash::message')
 
     <h1 class="mb-5">Метки</h1>
-    @if(Auth::check())
+    @auth
     <a href="{{ route('labels.create') }}" class="btn btn-primary">Создать метку</a>
-    @endif
+    @endauth
     <table class="table mt-2">
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Имя</th>
-            <th>Описание</th>
-            <th>Дата создания</th>
-            @if(Auth::check())
-            <th>Действия</th>
-            @endif
+            <th>{{__('ID')}}</th>
+            <th>{{__('Name')}}</th>
+            <th>{{__('Description')}}</th>
+            <th>{{__('Date of creation')}}</th>
+            @auth
+                <th>{{__('Actions')}}</th>
+            @endauth
         </tr>
         </thead>
         @foreach($labels as $label)
@@ -26,15 +26,15 @@
                 <td>{{ $label->name }}</td>
                 <td>{{ $label->description }}</td>
                 <td>{{ $label->created_at->format('d.m.Y') }}</td>
-                @if(Auth::check())
+                @auth
                 <td>
-                            <a href="{{ route('labels.destroy', $label->id) }}"
-                               data-method="delete"
-                               data-confirm="Вы уверены?"
-                               class="text-danger">Удалить</a>
-                        <a href="{{ route('labels.edit', $label->id) }}">Изменить</a>
+                    <a href="{{ route('labels.destroy', $label) }}"
+                       data-method="delete"
+                       data-confirm="{{__('Are you sure?')}}"
+                       class="text-danger">Удалить</a>
+                    <a href="{{ route('labels.edit', $label) }}">{{__('Change')}}</a>
                 </td>
-                @endif
+                @endauth
             </tr>
         @endforeach
     </table>
