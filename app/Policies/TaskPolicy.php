@@ -63,20 +63,8 @@ class TaskPolicy
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Task $task)
+    public function delete(User $user, Task $task): bool
     {
         return $task->createdBy->is($user);
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, Task $task)
-    {
-        //
     }
 }
